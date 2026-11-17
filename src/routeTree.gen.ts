@@ -10,33 +10,128 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AnalysisRouteImport } from './routes/analysis'
+import { Route as DefectsRouteImport } from './routes/defects'
+import { Route as ReferenceRouteImport } from './routes/reference'
+import { Route as TrainingRouteImport } from './routes/training'
+import { Route as JournalIndexRouteImport } from './routes/journal.index'
+import { Route as JournalIdRouteImport } from './routes/journal.$id'
+import { Route as JournalNewRouteImport } from './routes/journal.new'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AnalysisRoute = AnalysisRouteImport.update({
+  id: '/analysis',
+  path: '/analysis',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DefectsRoute = DefectsRouteImport.update({
+  id: '/defects',
+  path: '/defects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReferenceRoute = ReferenceRouteImport.update({
+  id: '/reference',
+  path: '/reference',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrainingRoute = TrainingRouteImport.update({
+  id: '/training',
+  path: '/training',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JournalIndexRoute = JournalIndexRouteImport.update({
+  id: '/journal/',
+  path: '/journal/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JournalIdRoute = JournalIdRouteImport.update({
+  id: '/journal/$id',
+  path: '/journal/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JournalNewRoute = JournalNewRouteImport.update({
+  id: '/journal/new',
+  path: '/journal/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/analysis': typeof AnalysisRoute
+  '/defects': typeof DefectsRoute
+  '/reference': typeof ReferenceRoute
+  '/training': typeof TrainingRoute
+  '/journal/$id': typeof JournalIdRoute
+  '/journal/new': typeof JournalNewRoute
+  '/journal/': typeof JournalIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/analysis': typeof AnalysisRoute
+  '/defects': typeof DefectsRoute
+  '/reference': typeof ReferenceRoute
+  '/training': typeof TrainingRoute
+  '/journal/$id': typeof JournalIdRoute
+  '/journal/new': typeof JournalNewRoute
+  '/journal': typeof JournalIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/analysis': typeof AnalysisRoute
+  '/defects': typeof DefectsRoute
+  '/reference': typeof ReferenceRoute
+  '/training': typeof TrainingRoute
+  '/journal/$id': typeof JournalIdRoute
+  '/journal/new': typeof JournalNewRoute
+  '/journal/': typeof JournalIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/analysis'
+    | '/defects'
+    | '/reference'
+    | '/training'
+    | '/journal/$id'
+    | '/journal/new'
+    | '/journal/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/analysis'
+    | '/defects'
+    | '/reference'
+    | '/training'
+    | '/journal/$id'
+    | '/journal/new'
+    | '/journal'
+  id:
+    | '__root__'
+    | '/'
+    | '/analysis'
+    | '/defects'
+    | '/reference'
+    | '/training'
+    | '/journal/$id'
+    | '/journal/new'
+    | '/journal/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AnalysisRoute: typeof AnalysisRoute
+  DefectsRoute: typeof DefectsRoute
+  ReferenceRoute: typeof ReferenceRoute
+  TrainingRoute: typeof TrainingRoute
+  JournalIdRoute: typeof JournalIdRoute
+  JournalNewRoute: typeof JournalNewRoute
+  JournalIndexRoute: typeof JournalIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +143,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/analysis': {
+      id: '/analysis'
+      path: '/analysis'
+      fullPath: '/analysis'
+      preLoaderRoute: typeof AnalysisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/defects': {
+      id: '/defects'
+      path: '/defects'
+      fullPath: '/defects'
+      preLoaderRoute: typeof DefectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reference': {
+      id: '/reference'
+      path: '/reference'
+      fullPath: '/reference'
+      preLoaderRoute: typeof ReferenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/training': {
+      id: '/training'
+      path: '/training'
+      fullPath: '/training'
+      preLoaderRoute: typeof TrainingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/journal/': {
+      id: '/journal/'
+      path: '/journal'
+      fullPath: '/journal/'
+      preLoaderRoute: typeof JournalIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/journal/$id': {
+      id: '/journal/$id'
+      path: '/journal/$id'
+      fullPath: '/journal/$id'
+      preLoaderRoute: typeof JournalIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/journal/new': {
+      id: '/journal/new'
+      path: '/journal/new'
+      fullPath: '/journal/new'
+      preLoaderRoute: typeof JournalNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AnalysisRoute: AnalysisRoute,
+  DefectsRoute: DefectsRoute,
+  ReferenceRoute: ReferenceRoute,
+  TrainingRoute: TrainingRoute,
+  JournalIdRoute: JournalIdRoute,
+  JournalNewRoute: JournalNewRoute,
+  JournalIndexRoute: JournalIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
