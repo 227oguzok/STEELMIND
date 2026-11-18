@@ -11,11 +11,11 @@ export function Field({
   className,
 }: {
   label: ReactNode;
-  htmlFor?: string;
-  error?: string;
-  hint?: ReactNode;
+  htmlFor?: string | undefined;
+  error?: string | undefined;
+  hint?: ReactNode | undefined;
   children: ReactNode;
-  className?: string;
+  className?: string | undefined;
 }) {
   return (
     <div className={cn("space-y-1.5", className)}>

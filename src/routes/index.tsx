@@ -54,7 +54,7 @@ function Dashboard() {
   return (
     <div className="space-y-4">
       <PageHeader
-        title="Главная панель"
+        title="Главная"
         subtitle="Последние введённые показания и события. Онлайн-связи с оборудованием нет."
         badge={hasDemo ? <DemoBadge /> : undefined}
         actions={

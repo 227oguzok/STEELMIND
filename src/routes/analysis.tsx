@@ -19,8 +19,8 @@ import { PARAMS, PARAM_KEYS, STANDS, type Param, type ParamValues } from "@/lib/
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/analysis")({
-  validateSearch: (s: Record<string, unknown>): { stand?: number } => {
-    const n = Number(s.stand);
+  validateSearch: (s: Record<string, unknown>): { stand?: number | undefined } => {
+    const n = Number(s["stand"]);
     return { stand: Number.isInteger(n) && n >= 1 && n <= STANDS.length ? n : undefined };
   },
   head: () => ({
@@ -55,7 +55,7 @@ function Analysis() {
   return (
     <div className="space-y-4">
       <PageHeader
-        title="Анализ показаний"
+        title="Показания"
         subtitle="Только по введённым вручную данным. Норма и уставки приложением не задаются."
         badge={readings.some((r) => r.demo) ? <DemoBadge /> : undefined}
       />
@@ -221,8 +221,8 @@ function AssessmentNote({
 }: {
   status: "insufficient" | "reference" | "statistics";
   count: number;
-  mean?: number;
-  sd?: number;
+  mean?: number | undefined;
+  sd?: number | undefined;
   unit: string;
 }) {
   return (
@@ -267,11 +267,11 @@ function RefEditor({ stand, param }: { stand: number; param: Param }) {
     const a = parseNum(min);
     const b = parseNum(max);
     const errs: Errors = {};
-    if (a === null) errs.min = "Введите число";
-    if (b === null) errs.max = "Введите число";
-    if (a === undefined && b === undefined) errs.min = "Укажите хотя бы одну границу";
-    if (typeof a === "number" && typeof b === "number" && a > b) errs.max = "Максимум меньше минимума";
-    if (!source.trim()) errs.source = "Укажите документ-источник";
+    if (a === null) errs["min"] = "Введите число";
+    if (b === null) errs["max"] = "Введите число";
+    if (a === undefined && b === undefined) errs["min"] = "Укажите хотя бы одну границу";
+    if (typeof a === "number" && typeof b === "number" && a > b) errs["max"] = "Максимум меньше минимума";
+    if (!source.trim()) errs["source"] = "Укажите документ-источник";
     setErrors(errs);
     if (Object.keys(errs).length) return;
     store.upsertRef({ id: ref?.id ?? newId(), stand, param, min: a ?? undefined, max: b ?? undefined, source: source.trim() });
@@ -308,13 +308,13 @@ function RefEditor({ stand, param }: { stand: number; param: Param }) {
       </div>
       {open && (
         <form onSubmit={save} className="mt-3 grid gap-2 sm:grid-cols-4" noValidate>
-          <Field label="Мин." htmlFor="ref-min" error={errors.min}>
+          <Field label="Мин." htmlFor="ref-min" error={errors["min"]}>
             <Input id="ref-min" inputMode="decimal" className={cn(inputCls, "font-mono")} value={min} onChange={(e) => setMin(e.target.value)} />
           </Field>
-          <Field label="Макс." htmlFor="ref-max" error={errors.max}>
+          <Field label="Макс." htmlFor="ref-max" error={errors["max"]}>
             <Input id="ref-max" inputMode="decimal" className={cn(inputCls, "font-mono")} value={max} onChange={(e) => setMax(e.target.value)} />
           </Field>
-          <Field label="Источник" htmlFor="ref-src" error={errors.source} className="sm:col-span-2">
+          <Field label="Источник" htmlFor="ref-src" error={errors["source"]} className="sm:col-span-2">
             <Input id="ref-src" placeholder="Напр.: техкарта №…" className={inputCls} value={source} onChange={(e) => setSource(e.target.value)} />
           </Field>
           <div className="flex gap-2 sm:col-span-4">
@@ -361,7 +361,7 @@ function ReadingForm({ defaultStand }: { defaultStand: number }) {
   return (
     <form onSubmit={submit} className="space-y-3" noValidate>
       <div className="grid grid-cols-2 gap-2">
-        <Field label="Клеть" htmlFor="rd-stand" error={errors.stand}>
+        <Field label="Клеть" htmlFor="rd-stand" error={errors["stand"]}>
           <NativeSelect id="rd-stand" value={stand} onChange={(e) => setStand(Number(e.target.value))}>
             {STANDS.map((s) => (
               <option key={s} value={s}>
@@ -370,7 +370,7 @@ function ReadingForm({ defaultStand }: { defaultStand: number }) {
             ))}
           </NativeSelect>
         </Field>
-        <Field label="Время" htmlFor="rd-dt" error={errors.datetime}>
+        <Field label="Время" htmlFor="rd-dt" error={errors["datetime"]}>
           <Input id="rd-dt" type="datetime-local" className={inputCls} value={datetime} onChange={(e) => setDatetime(e.target.value)} />
         </Field>
       </div>
@@ -388,7 +388,7 @@ function ReadingForm({ defaultStand }: { defaultStand: number }) {
           </Field>
         ))}
       </div>
-      {errors.values && <p role="alert" className="text-xs font-medium text-alarm">{errors.values}</p>}
+      {errors["values"] && <p role="alert" className="text-xs font-medium text-alarm">{errors["values"]}</p>}
       <Field label="Примечание" htmlFor="rd-note">
         <Input id="rd-note" className={inputCls} value={note} onChange={(e) => setNote(e.target.value)} />
       </Field>

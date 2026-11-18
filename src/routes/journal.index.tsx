@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { Plus, Search } from "lucide-react";
+import { Download, Plus, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { PageHeader, EmptyState } from "@/components/page";
@@ -11,6 +11,7 @@ import { sortByDateDesc, useAppData } from "@/lib/store";
 import { matchesSearch } from "@/lib/filters";
 import { EVENT_TYPES, type EventType } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { downloadFile, eventsToCSV, stamp } from "@/lib/export";
 
 export const Route = createFileRoute("/journal/")({
   head: () => ({
@@ -39,14 +40,36 @@ function Journal() {
   return (
     <div className="space-y-4">
       <PageHeader
-        title="Архив событий"
+        title="Журнал событий"
         subtitle={`${data.events.length} записей · хранится локально`}
         actions={
-          <Button asChild>
-            <Link to="/journal/new">
-              <Plus /> Новая запись
-            </Link>
-          </Button>
+          <>
+            <Button asChild>
+              <Link to="/journal/new">
+                <Plus /> Новая запись
+              </Link>
+            </Button>
+            <Button
+              variant="panel"
+              disabled={!list.length}
+              onClick={() => downloadFile(`steelmind-journal-${stamp()}.csv`, eventsToCSV(list), "text/csv;charset=utf-8")}
+            >
+              <Download /> CSV
+            </Button>
+            <Button
+              variant="panel"
+              disabled={!list.length}
+              onClick={() =>
+                downloadFile(
+                  `steelmind-journal-${stamp()}.json`,
+                  JSON.stringify({ app: "STEELMIND", exportedAt: new Date().toISOString(), events: list }, null, 2),
+                  "application/json",
+                )
+              }
+            >
+              <Download /> JSON
+            </Button>
+          </>
         }
       />
 

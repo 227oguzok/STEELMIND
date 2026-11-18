@@ -6,9 +6,10 @@ import { EventForm } from "@/components/event-form";
 import { isEventType, type EventType } from "@/lib/types";
 
 export const Route = createFileRoute("/journal/new")({
-  validateSearch: (s: Record<string, unknown>): { type?: EventType } => ({
-    type: isEventType(s.type) ? s.type : undefined,
-  }),
+  validateSearch: (s: Record<string, unknown>): { type?: EventType | undefined } => {
+    const t = s["type"];
+    return { type: isEventType(t) ? t : undefined };
+  },
   head: () => ({
     meta: [
       { title: "Новая запись — STEELMIND" },

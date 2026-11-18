@@ -108,9 +108,9 @@ export interface EventRecord {
   after: ParamValues;
   result: string;
   attachments: AttachmentMeta[];
-  transition?: TransitionInfo;
-  defect?: DefectInfo;
-  demo?: boolean;
+  transition?: TransitionInfo | undefined;
+  defect?: DefectInfo | undefined;
+  demo?: boolean | undefined;
   createdAt: string;
   updatedAt: string;
 }
@@ -123,7 +123,7 @@ export interface Reading {
   stand: number;
   values: ParamValues;
   note: string;
-  demo?: boolean;
+  demo?: boolean | undefined;
   createdAt: string;
 }
 
@@ -132,7 +132,7 @@ export interface ReferenceRange {
   id: string;
   stand: number;
   param: Param;
-  min?: number;
-  max?: number;
+  min?: number | undefined;
+  max?: number | undefined;
   source: string;
 }

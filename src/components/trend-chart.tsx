@@ -27,9 +27,9 @@ export function TrendChart({
 }: {
   points: TrendPoint[];
   unit: string;
-  flags?: Record<string, Flag>;
-  refRange?: { min?: number; max?: number };
-  height?: number;
+  flags?: Record<string, Flag> | undefined;
+  refRange?: { min?: number | undefined; max?: number | undefined } | undefined;
+  height?: number | undefined;
 }) {
   const data = [...points].sort((a, b) => a.datetime.localeCompare(b.datetime));
   return (
@@ -52,8 +52,8 @@ export function TrendChart({
           />
           {refRange && (refRange.min !== undefined || refRange.max !== undefined) && (
             <ReferenceArea
-              y1={refRange.min}
-              y2={refRange.max}
+              {...(refRange.min !== undefined ? { y1: refRange.min } : {})}
+              {...(refRange.max !== undefined ? { y2: refRange.max } : {})}
               fill="var(--ok)"
               fillOpacity={0.08}
               stroke="var(--ok)"

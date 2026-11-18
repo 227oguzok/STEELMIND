@@ -34,7 +34,7 @@ function Reference() {
 
   return (
     <div className="space-y-4">
-      <PageHeader title="Техническая база" subtitle="Общие сведения. Параметры конкретного стана не подставляются." />
+      <PageHeader title="Справочник" subtitle="Общие сведения. Параметры конкретного стана не подставляются." />
 
       <div className="relative">
         <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />

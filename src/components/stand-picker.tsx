@@ -8,7 +8,7 @@ export function StandPicker({
 }: {
   value: number[];
   onChange: (v: number[]) => void;
-  multiple?: boolean;
+  multiple?: boolean | undefined;
 }) {
   const toggle = (s: number) => {
     if (!multiple) return onChange(value.includes(s) ? [] : [s]);

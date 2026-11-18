@@ -16,11 +16,11 @@ function checkParams(prefix: string, v: ParamValues, errors: Errors) {
 export function validateEvent(d: EventDraft): Errors {
   const errors: Errors = {};
   if (!d.datetime || Number.isNaN(new Date(d.datetime).getTime())) {
-    errors.datetime = "Укажите дату и время";
+    errors["datetime"] = "Укажите дату и время";
   }
 
   if (STAND_REQUIRED.includes(d.type) && d.stands.length === 0) {
-    errors.stands = "Укажите номер клети";
+    errors["stands"] = "Укажите номер клети";
   }
 
   if (d.type === "transition") {
@@ -45,7 +45,7 @@ export function validateEvent(d: EventDraft): Errors {
   }
 
   if ((d.type === "fault" || d.type === "note") && !d.reason.trim() && !d.comment.trim()) {
-    errors.comment = "Заполните причину или комментарий";
+    errors["comment"] = "Заполните причину или комментарий";
   }
 
   checkParams("before", d.before, errors);
@@ -61,10 +61,10 @@ export interface ReadingInput {
 
 export function validateReading(r: ReadingInput): Errors {
   const errors: Errors = {};
-  if (!Number.isInteger(r.stand) || r.stand < 1) errors.stand = "Выберите клеть";
-  if (!r.datetime || Number.isNaN(new Date(r.datetime).getTime())) errors.datetime = "Укажите дату и время";
+  if (!Number.isInteger(r.stand) || r.stand < 1) errors["stand"] = "Выберите клеть";
+  if (!r.datetime || Number.isNaN(new Date(r.datetime).getTime())) errors["datetime"] = "Укажите дату и время";
   const filled = PARAM_KEYS.filter((k) => r.values[k] !== undefined);
-  if (filled.length === 0) errors.values = "Введите хотя бы одно значение";
+  if (filled.length === 0) errors["values"] = "Введите хотя бы одно значение";
   checkParams("values", r.values, errors);
   return errors;
 }

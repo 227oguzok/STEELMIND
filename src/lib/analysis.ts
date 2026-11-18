@@ -10,8 +10,8 @@ export type Flag = "out-of-range" | "stat-outlier";
 export interface Assessment {
   status: "insufficient" | "reference" | "statistics";
   flags: Record<string, Flag>;
-  mean?: number;
-  sd?: number;
+  mean?: number | undefined;
+  sd?: number | undefined;
   count: number;
 }
 
@@ -20,7 +20,7 @@ export interface Point {
   value: number;
 }
 
-export function assessSeries(points: Point[], ref?: { min?: number; max?: number }): Assessment {
+export function assessSeries(points: Point[], ref?: { min?: number | undefined; max?: number | undefined }): Assessment {
   const flags: Record<string, Flag> = {};
   const count = points.length;
   const hasRef = ref && (ref.min !== undefined || ref.max !== undefined);

@@ -2,7 +2,7 @@ import { HardDrive, ShieldAlert } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
-export function DemoBadge({ className, label = "ДЕМО / условные данные" }: { className?: string; label?: string }) {
+export function DemoBadge({ className, label = "ДЕМО / условные данные" }: { className?: string | undefined; label?: string }) {
   return (
     <Badge variant="demo" className={className}>
       {label}

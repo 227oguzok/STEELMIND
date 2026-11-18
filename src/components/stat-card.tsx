@@ -16,8 +16,8 @@ export function StatCard({
   unit: string;
   meta: string;
   icon: LucideIcon;
-  demo?: boolean;
-  tone?: "ok" | "warn" | "muted";
+  demo?: boolean | undefined;
+  tone?: "ok" | "warn" | "muted" | undefined;
 }) {
   return (
     <div className={cn("panel relative overflow-hidden p-4", demo && "demo-hatch")}>

@@ -62,12 +62,12 @@ export function EventForm({
   onSaved,
   onCancel,
 }: {
-  initial?: EventRecord;
-  lockedType?: EventType;
-  defaultType?: EventType;
-  submitLabel?: string;
+  initial?: EventRecord | undefined;
+  lockedType?: EventType | undefined;
+  defaultType?: EventType | undefined;
+  submitLabel?: string | undefined;
   onSaved: (rec: EventRecord) => void;
-  onCancel?: () => void;
+  onCancel?: (() => void) | undefined;
 }) {
   const [type, setType] = useState<EventType>(initial?.type ?? lockedType ?? defaultType);
   const [datetime, setDatetime] = useState(() => initial?.datetime ?? toLocalInput(new Date()));
@@ -177,13 +177,13 @@ export function EventForm({
         </Field>
       )}
 
-      <Field label="Дата и время" htmlFor="ev-dt" error={errors.datetime}>
+      <Field label="Дата и время" htmlFor="ev-dt" error={errors["datetime"]}>
         <Input id="ev-dt" type="datetime-local" className={inputCls} value={datetime} onChange={(e) => setDatetime(e.target.value)} />
       </Field>
 
       <Field
         label={`${standLabel}${STAND_REQUIRED.includes(type) ? " *" : " (если применимо)"}`}
-        error={errors.stands}
+        error={errors["stands"]}
         hint="Нумерация по нейтральной схеме из 16 клетей — конфигурация уточняется"
       >
         <StandPicker value={stands} onChange={setStands} multiple={type === "transition" || type === "note" || type === "fault"} />
@@ -270,7 +270,7 @@ export function EventForm({
       <Field label="Причина" htmlFor="ev-reason">
         <Input id="ev-reason" className={inputCls} value={reason} onChange={(e) => setReason(e.target.value)} />
       </Field>
-      <Field label="Комментарий" htmlFor="ev-comment" error={errors.comment}>
+      <Field label="Комментарий" htmlFor="ev-comment" error={errors["comment"]}>
         <Textarea id="ev-comment" className={textareaCls} value={comment} onChange={(e) => setComment(e.target.value)} />
       </Field>
 

@@ -9,13 +9,13 @@ import {
 } from "lucide-react";
 
 export const NAV_ITEMS = [
-  { to: "/", short: "Панель", label: "Главная панель", icon: LayoutDashboard },
-  { to: "/analysis", short: "Анализ", label: "Анализ показаний", icon: Activity },
-  { to: "/journal", short: "Журнал", label: "Архив событий", icon: ClipboardList },
-  { to: "/defects", short: "Дефекты", label: "Диагностика дефектов", icon: ScanSearch },
-  { to: "/training", short: "Обучение", label: "Обучение оператора", icon: GraduationCap },
-  { to: "/reference", short: "Техбаза", label: "Техническая база", icon: BookOpen },
-  { to: "/analytics", short: "Аналитика", label: "Архив и аналитика", icon: BarChart3 },
+  { to: "/", short: "Главная", label: "Главная", icon: LayoutDashboard },
+  { to: "/analysis", short: "Показания", label: "Показания", icon: Activity },
+  { to: "/journal", short: "Журнал", label: "Журнал событий", icon: ClipboardList },
+  { to: "/defects", short: "Дефекты", label: "Дефекты", icon: ScanSearch },
+  { to: "/training", short: "Обучение", label: "Обучение", icon: GraduationCap },
+  { to: "/reference", short: "Справочник", label: "Справочник", icon: BookOpen },
+  { to: "/analytics", short: "Аналитика", label: "Аналитика и экспорт", icon: BarChart3 },
 ] as const;
 
 /** First four go to the iPhone bottom bar; the rest live in the "Ещё" sheet. */

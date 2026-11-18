@@ -8,9 +8,9 @@ export function PageHeader({
   badge,
 }: {
   title: string;
-  subtitle?: string;
-  actions?: ReactNode;
-  badge?: ReactNode;
+  subtitle?: string | undefined;
+  actions?: ReactNode | undefined;
+  badge?: ReactNode | undefined;
 }) {
   return (
     <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
@@ -33,11 +33,11 @@ export function Panel({
   className,
   id,
 }: {
-  title?: ReactNode;
-  actions?: ReactNode;
+  title?: ReactNode | undefined;
+  actions?: ReactNode | undefined;
   children: ReactNode;
-  className?: string;
-  id?: string;
+  className?: string | undefined;
+  id?: string | undefined;
 }) {
   return (
     <section id={id} className={cn("panel p-4", className)}>

@@ -17,8 +17,8 @@ export function MediaThumb({
   onRemove,
 }: {
   meta: AttachmentMeta;
-  file?: Blob;
-  onRemove?: () => void;
+  file?: Blob | undefined;
+  onRemove?: (() => void) | undefined;
 }) {
   const [url, setUrl] = useState<string | null>(null);
   const [missing, setMissing] = useState(false);

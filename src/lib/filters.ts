@@ -26,11 +26,11 @@ export function matchesSearch(e: EventRecord, q: string) {
 }
 
 export interface EventFilter {
-  from?: string; // YYYY-MM-DD
-  to?: string; // YYYY-MM-DD
-  stand?: number;
-  type?: EventType;
-  q?: string;
+  from?: string | undefined; // YYYY-MM-DD
+  to?: string | undefined; // YYYY-MM-DD
+  stand?: number | undefined;
+  type?: EventType | undefined;
+  q?: string | undefined;
 }
 
 export function filterEvents(events: EventRecord[], f: EventFilter) {
